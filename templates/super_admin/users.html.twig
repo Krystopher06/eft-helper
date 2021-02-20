@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title %} Liste des utilisateurs {% endblock %}
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Rôles</th>
+            <th>Nom en jeux</th>
+            <th>Twitch name</th>
+            <th>Discord name</th>
+            <th>Action</th>
+        
+        </thead>
+        <tbody>
+            {# On boucle sur les utilisateurs #}
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        {% for role in user.roles %}
+                            {% if role == "ROLE_USER" %}
+                                Joueur
+                            {% elseif role =="ROLE_SHERPA" %}
+                                Sherpa
+                            {% elseif role =="ROLE_MODERATOR" %}
+                                Moderateur
+                            {% elseif role =="ROLE_ADMIN" %}
+                                Admin
+                            {% elseif role =="ROLE_SUPER_ADMIN" %}
+                                Super Admin
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ user.nameInGame }}</td>
+                    <td>{{ user.twitchName }}</td>
+                    <td>{{ user.discordName }}</td>
+                    <td><a href="{{path(('app_super_admin_app_edit_utilisateur'), {'id':user.id})}}" class="btn btn-warning">Edit</a>
+                    <a href="{{path(('app_super_admin_app_delete_utilisateur'), {'id':user.id})}}" class="btn btn-danger">Supprimer</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan=5> Il n'y a pas d'utilisateurs inscrits</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <a href="" class="btn btn-primary">Ajouter un utilisateur</a>
+{% endblock %}

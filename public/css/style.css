@@ -1,0 +1,360 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    font-family: 'Lato', sans-serif;
+    background-color: #0E0E0E;
+}
+.main-content
+{
+    padding-top: 50px;
+}
+
+.header
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    z-index: 1;
+    background-color: black;
+}
+
+.header a 
+{
+    font-size: 30px;
+    text-align: center;       
+    text-decoration: none;
+    color: #BFA373;
+    z-index: 2;
+    margin: 0 auto;
+}
+        
+
+
+/* nav menu button */
+.menu-btn
+{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor:  pointer;
+    z-index: 1;
+    margin: auto 0;
+}
+
+.menu-items.open
+{
+    transform: translateX(0);
+}
+
+.menu-items
+{
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(100vw);
+    background-color: black;
+    transition: transform 0.3s ease-in-out;
+    margin: auto 0;
+    text-decoration: none;
+    list-style: none;
+
+    
+}
+
+
+
+
+.menu-items-1
+{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding-top: 130px;
+    
+}
+.menu-items-1 li 
+{
+    padding: 0px 0;
+}
+.menu-items-1 li:first-child
+{
+    order: 0;
+}
+.menu-items li a
+{
+    color: #BFA373;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.menu-items li a:hover
+{
+    background: #BFA373;
+    color: black;
+    border-radius: 3px;
+}
+
+.menu-items-2
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 60%;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.menu-items-2 li
+{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+
+.menu-btn__lines,
+.menu-btn__lines::before,
+.menu-btn__lines::after
+{
+    width: 1.5rem;
+    height: 0.1rem;
+    background-color: #BFA373;
+    transition: all 0.5s ease-in-out;
+}
+.menu-btn__lines::before,
+.menu-btn__lines::after
+{
+    content: "";
+    position: absolute;
+}
+.menu-btn__lines::before
+{
+    transform: translateY(-0.5rem);
+}
+.menu-btn__lines::after
+{
+    transform: translateY(0.5rem);
+}
+ /* animation */
+.menu-btn.open .menu-btn__lines
+{
+    transform: translateX(2rem);
+    background-color: transparent;
+}
+.menu-btn.open .menu-btn__lines::before
+{
+    transform: rotate(45deg) translate(-1.5rem, 1.5rem);
+}
+.menu-btn.open .menu-btn__lines::after
+{
+    transform: rotate(-45deg) translate(-1.5rem, -1.5rem);
+}
+
+.table
+{
+    overflow: hidden;
+    overflow-x: scroll;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+}
+
+
+
+@media (min-width: 1024px) 
+{
+   /* header */
+.header
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    z-index: 1;
+
+    background-color: black;
+}
+.header a
+{
+    font-size: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 30%;
+}
+.menu-btn
+{
+    display: none;
+    position: relative;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    z-index: 1;
+    margin: auto 0;
+}
+.menu-items
+{
+    position: relative;
+    list-style: none;
+    display: flex;
+    height: initial;
+    flex-flow: row;
+    align-items: center;
+    width: 100%;
+    margin: auto 0;
+    transform: none;
+}
+
+.menu-items-1
+{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+    display: flex;
+    padding: 0;
+}
+
+.menu-items-1 li:first-child
+{
+    order: 2;
+}
+
+
+
+.menu-items-2
+{
+   
+    display: flex;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    justify-content: left;
+    flex-direction: row;
+}
+.menu-items-2 li
+{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.menu-items li a 
+{
+    font-size: 20px;
+   color: #BFA373;
+    transition: background 0.3s ease-in-out;
+    
+}
+.menu-btn.open{
+    display: none;
+}
+.table
+{
+    overflow: hidden;
+    overflow-x: hidden;
+    display: initial;
+    width: 100%;
+    white-space: unset;
+}
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- * @UniqueEntity(fields={"userName"}, message="There is already an account with this userName")
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class Users implements UserInterface
 {
@@ -55,7 +55,7 @@ class Users implements UserInterface
     /**
      * @ORM\Column(type="string", length=100, unique=true, nullable=true)
      */
-    private $userName;
+    private $username;
     /**
      * @ORM\Column(type="string", length=100, unique=true, nullable=true)
      */
@@ -123,7 +123,7 @@ class Users implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->userName;
+        return (string) $this->username;
     }
     public function getTwitchName(): string
     {
@@ -202,9 +202,9 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function setUserName(string $userName): self
+    public function setUsername(string $username): self
     {
-        $this->userName = $userName;
+        $this->username = $username;
 
         return $this;
     }
