@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Form\AddUserType;
 use App\Form\EditUserType;
 use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +34,8 @@ class SuperAdminController extends AbstractController
             'users' => $users ->findALL()
         ]);
     }
+
+    
 
     /**
      * Modifier un utilisateur
@@ -68,6 +71,44 @@ class SuperAdminController extends AbstractController
 
         return $this->redirectToRoute('app_super_admin_app_utilisateurs');
 }
+    /* *
+     * @Route("/utilisateur/add", name="app_add_utilisateur")
+     */
+    /* public function (Request $request): Response
+    {
+        $form = $this->createForm(AddUserType::class);
+        $form->handleRequest($request);
+
+        return $this->render("/super_admin/adduser.html.twig", [
+            "userForm" => $form->createView(),
+        ]);
+        return $this->redirectToRoute('app_super_admin_app_utilisateurs');
+
+    } */
+    /**
+     * @Route("/utilisateur/add", name="app_add_utilisateur")
+     */
+    public function addUtilisateur(Request $request): Response
+    {
+        $user = new Users();
+        $form = $this->createForm(AddUserType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_super_admin_app_utilisateurs');
+        };
+
+        return $this->render("/super_admin/adduser.html.twig",[
+            "userForm" => $form->createView(),
+        ]);
+        return $this->redirectToRoute('app_super_admin_app_utilisateurs');
+
+    }
+}
     
 
-}
+
