@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/super_admin", name="app_super_admin_")
@@ -88,7 +89,7 @@ class SuperAdminController extends AbstractController
     /**
      * @Route("/utilisateur/add", name="app_add_utilisateur")
      */
-    public function addUtilisateur(Request $request): Response
+    public function addUtilisateur(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new Users();
         $form = $this->createForm(AddUserType::class, $user);
@@ -96,10 +97,17 @@ class SuperAdminController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('app_super_admin_app_utilisateurs');
+            return $this->redirectToRoute('app_super_admin_app_utilisateurs'); //redirection sur le crud
         };
 
         return $this->render("/super_admin/adduser.html.twig",[

@@ -13,7 +13,45 @@ body
 {
     padding-top: 50px;
 }
+/* Eye on/off */
 
+.container-form  div > input
+{
+ margin: 10px 0 10px 10x
+}
+.container-form  div > label
+{
+ padding-top:10px ;
+}
+.block-password-eye{
+    /* display: flex  !important;   */ 
+    position: relative;
+}
+.password-icon1{
+    position: absolute;
+    top: 34%;
+    left: 100%;
+    transform: translateY(-50%);
+    margin: 0 5px;
+}
+.password-icon2{
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translateY(-120%);
+    margin: 0 5px;
+}
+.feather-eye-off,.password-icon1  eye-off1, .password-icon2  .eye-off2  {
+    display: none;
+}
+
+.password-icon1:hover, .password-icon2:hover {
+    cursor: pointer;
+    color: #ff4754;
+}
+.rgpd{
+    width: 25px;
+}
 .header
 {
     position: fixed;
@@ -34,8 +72,8 @@ body
     text-decoration: none;
     color: #BFA373;
     z-index: 2;
-    margin: 0 auto;
-}
+/*     margin: 0 auto;
+ */}
         
 
 
@@ -285,6 +323,15 @@ body
     width: 100%;
     white-space: unset;
 }
+
+
+
+
+
+
+
+
+
 
 
 

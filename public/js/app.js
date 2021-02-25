@@ -1,3 +1,13 @@
+
+
+
+
+
+function toggle() {
+  menuBtn.classList.toggle("open");
+  menuItems.classList.toggle("open");
+}
+
 const menuBtn = document.querySelector(".menu-btn");
 const menuItems = document.querySelector(".menu-items");
 const menuItem = document.querySelectorAll(".menu-item");
@@ -16,7 +26,4 @@ menuItem.forEach((item) => {
   });
 });
 
-function toggle() {
-  menuBtn.classList.toggle("open");
-  menuItems.classList.toggle("open");
-}
+

@@ -10,7 +10,7 @@
 		created_at 
  */
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\UsersRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,10 +42,17 @@ class Users implements UserInterface
     private $roles = [];
 
     /**
+     * @var string Le mot de passe en clair pour gestion formulaire
+     * 
+     */
+    private $plainPassword;
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private $password; 
+
+    
 
     /**
      * @ORM\Column(type="boolean")
@@ -151,6 +158,16 @@ class Users implements UserInterface
     /**
      * @see UserInterface
      */
+    public function getPlainPassword(): ?string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $password): self
+    {
+        $this->plainPassword = $password;
+        return $this;
+    }
     public function getPassword(): string
     {
         return (string) $this->password;
@@ -162,6 +179,9 @@ class Users implements UserInterface
 
         return $this;
     }
+
+
+
     public function setTwitchName(string $twitchName): self
     {
         $this-> twitchName = $twitchName;

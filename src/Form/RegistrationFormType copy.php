@@ -21,18 +21,21 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => ["class" => 'form-control']
+                'attr' => ["class" => 'form-control'],
+                'label' => ['Email']
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Accepter les conditions de service',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
-                ],
+                ],'attr' => ["class" => 'form-control rgpd']
             ])
             ->add('username', TextType::class,
-            ['attr' =>["class" => 'form-control'],'required'=>false, 'constraints' => [
+            [   'label' => 'Pseudo',
+                'attr' => ["class" => 'form-control'],'required'=>false, 'constraints' => [
                 new Length([
                 'min' => 6,
                 'minMessage' => 'Your username should be at least {{ limit }} characters',
@@ -40,13 +43,20 @@ class RegistrationFormType extends AbstractType
                 'max' => 255 ,
             ]),
             ]])
-            ->add('twitchName', TextType::class, ['attr' => ["class" => 'form-control']])
-            ->add('discordName', TextType::class, ['attr' => ["class" => 'form-control']])
-            ->add('nameInGame', TextType::class, ['attr' => ["class" => 'form-control']])
-            /* ->add('plainPassword', PasswordType::class, [
+            ->add('twitchName', TextType::class,['label' => 'Pseudo Twitch',
+                'attr' => ["class" => 'form-control']
+            ])
+            ->add('discordName', TextType::class,['label' => 'Nom discord',
+                'attr' => ["class" => 'form-control']
+            ])
+            ->add('nameInGame', TextType::class, ['label' => 'Pseudo dans le jeux',
+                'attr' => ["class" => 'form-control']
+            ])
+           /*  ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'mapped' => false,
+                'attr' => ["class" => 'form-control']
+                ,'mapped' => false,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -59,13 +69,13 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ]) */
-            ->add('plainPassword', RepeatedType::class, [
+            ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
-                'options' => ['attr' => ['class' => 'password-field ']],
+                'options' => ['attr' => ['class' => 'password-field']],
                 'required' => false,
-                'first_options'  => ['label' => 'Mot de passe', 'attr'=>['class' =>'form-control password-register-1']],
-                'second_options' => ['label' => 'Confirmer le mot de passe', 'attr'=>['class' =>' form-control password-register-2']],
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmer le mot de passe'],
             ]);
         ;
     }

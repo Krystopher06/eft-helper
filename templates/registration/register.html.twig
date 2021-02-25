@@ -1,25 +1,115 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class='col-md-12 '>
+				{% for flashError in app.flashes('verify_email_error') %}
+					<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+				{% endfor %}
+				<h1>Register</h1>
+			</div>
+		</div>
+		<div class="row container-form">
+			<div class="col-9 col-sm-9 col-md-6 col-lg-5 ">
+				{{ form_start(registrationForm) }}
 
-    <h1>Register</h1>
+				{{ form_row(registrationForm.email) }}
 
-    {{ form_start(registrationForm) }}
-        <p class"ok">{{ form_row(registrationForm.email) }}</p>
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.username)}}
-        {{ form_row(registrationForm.nameInGame)}}
-        {{ form_row(registrationForm.twitchName)}}
-        {{ form_row(registrationForm.discordName)}}
-        {{ form_row(registrationForm.agreeTerms) }}
+				<div class="block-password-eye ">
+					<div class="password-icon1 ">
+						<i data-feather="eye" class="eye1"></i>
+						<i data-feather="eye-off" class="eye-off1"></i>
+					</div>
+					<div class="password-icon2 ">
+						<i data-feather="eye" class="eye2"></i>
+						<i data-feather="eye-off" class="eye-off2"
+						></i>
+					</div>
+					{{ form_row(registrationForm.plainPassword, {
+                        label: 'plainPassword', class:'password-register',
+                        id:"",
+}) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+				</div>
+				{{ form_row(registrationForm.username)}}
+				{{ form_row(registrationForm.nameInGame)}}
+				{{ form_row(registrationForm.twitchName)}}
+				{{ form_row(registrationForm.discordName)}}
+				{{ form_row(registrationForm.agreeTerms,{
+                    id:"agreeTerms",
+                }) }}
+
+				<button type="submit" class="btn btn-primary " disabled id="btn-register">Register</button>
+				{{ form_end(registrationForm) }}
+			</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/feather-icons"></script> 
+	<script>
+
+		feather.replace();
+
+//eyes
+const eye1 = document.querySelector('.eye1');
+const eye2 = document.querySelector('.eye2');
+const eyeoff1 = document.querySelector('.eye-off1');
+const eyeoff2 = document.querySelector('.eye-off2');
+const passwordField1 = document.querySelector('.password-register-1');
+const passwordField2 = document.querySelector('.password-register-2');
+
+// eye 1
+eye1.addEventListener('click', () => {
+eye1.style.display = "none";
+eyeoff1.style.display = "block";
+passwordField1.type = "text";
+})
+eyeoff1.addEventListener('click', () => {
+eye1.style.display = "block";
+eyeoff1.style.display = "none";
+passwordField1.type = "password";
+}) 
+//eye 2
+eye2.addEventListener('click', () => {
+eye2.style.display = "none";
+eyeoff2.style.display = "block";
+passwordField2.type = "text";
+})
+eyeoff2.addEventListener('click', () => {
+eye2.style.display = "block";
+eyeoff2.style.display = "none";
+passwordField2.type = "password";
+}) 
+
+let = passwordRegister1 = document.querySelector('.password-register-1');
+let = passwordRegister2 = document.querySelector('.password-register-2');
+let btnRegister = document.getElementById("btn-register");
+
+
+passwordRegister1.addEventListener('keyup', () => {
+	enableDisable(); 	//on teste à chaque fois qu'on appuie sur une touche si la longueur est de > 6 caractère
+})
+passwordRegister2.addEventListener('keyup', () => {
+	enableDisable();
+})
+
+function enableDisable(){
+	if(passwordRegister1.value.length > 6 && passwordRegister2.value.length > 6){
+		//si la longueur de password 1 est > 6 ET la longueur de password2 > 6
+		btnRegister.disabled = false;
+
+	}else{
+				btnRegister.disabled = true;
+
+	}
+}
+
+
+
+
+
+	</script>
 {% endblock %}

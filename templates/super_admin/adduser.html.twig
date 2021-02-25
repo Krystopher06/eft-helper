@@ -1,6 +1,15 @@
 {% extends 'base.html.twig' %}
-{% block title %} Modifier l'utilisateur {% endblock %}
+{% block title %}
+	Modifier l'utilisateur
+{% endblock %}
 {% block body %}
-    <h1>Ajouter un utilisateur</h1>
-    {{ form(userForm)}}
+	<div class="container-fluid">
+		<div class="row">
+				<h1 class=' col-md-12 '>Ajouter un utilisateur</h1>
+			<div class="lol col-sm-12 col-md-9 col-lg-6">
+				{{ form_start(userForm) }}
+				{{ form_end(userForm) }}
+			</div>
+		</div>
+	</div>
 {% endblock %}

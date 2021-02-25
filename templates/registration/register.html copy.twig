@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+
+	<h1>Register</h1>
+    <form action="">
+<div class="form-group">
+
+	{{ form_start(registrationForm) }}
+    <div class='form-label'>
+    
+    {{ form_label(registrationForm.email)}}
+	{{ form_widget(registrationForm.email, {
+        class: 'form-control'
+    })}}
+    {{ form_errors(registrationForm.email)}}
+    </div>
+	<div class="block-password-eye ">
+		{{ form_row(registrationForm.plainPassword, {
+            label: 'Password',
+            id:"password-register",
+            
+        }) }}
+		<div class="password-icon">
+			<i data-feather="eye"></i>
+			<i data-feather="eye-off"></i>
+		</div>
+	</div>
+
+	{{ form_row(registrationForm.username)}}
+	{{ form_row(registrationForm.nameInGame)}}
+	{{ form_row(registrationForm.twitchName)}}
+	{{ form_row(registrationForm.discordName)}}
+	{{ form_row(registrationForm.agreeTerms,{
+            id:"agreeTerms",
+        }) }}
+
+	<button type="submit" class="btn btn-primary" id="btn-register" disabled>Register</button>
+	{{ form_end(registrationForm) }}
+    </form>
+</div>
+	<script src="https://unpkg.com/feather-icons"></script>
+	<script>
+
+		feather.replace();
+
+const eye = document.querySelector('.feather-eye');
+const eyeoff = document.querySelector('.feather-eye-off');
+const passwordField = document.querySelector('#password-register');
+eye.addEventListener('click', () => {
+    eye.style.display = "none";
+    eyeoff.style.display = "block";
+    passwordField.type = "text";
+})
+eyeoff.addEventListener('click', () => {
+    eye.style.display = "block";
+    eyeoff.style.display = "none";
+    passwordField.type = "password";
+})
+
+let passwordRegister = document.getElementById("password-register");
+
+passwordRegister.addEventListener('keyup', () => {
+if (passwordRegister.value.length > 6) {
+btnRegister.disabled = false;
+
+} else {
+btnRegister.disabled = true;
+}
+});
+
+
+
+
+
+
+
+
+
+	</script>
+{% endblock %}
